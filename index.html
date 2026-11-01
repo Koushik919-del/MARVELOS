@@ -193,10 +193,261 @@ You're starting to glitch, so that's my cue. Get down there, check out the local
         <div class="doom-text">VON DOOM<br>INDUSTRIES</div>
     </div>
     <div class="icon" style="top: 20px; left: 20px;" onclick="openWindow('dailybugle')"><i><img src="https://z-cdn-media.chatglm.cn/files/147a50ee-d500-4b99-a83a-8a42f972a452.png?auth_key=1891817943-45fb628b3b0e4cf3b1f5bcf796cae5f0-0-9aea17300ab838552c916b14f0f03715" alt="Daily Bugle"><span>dailybugle</span></i></div>
-    <div class="icon" style="top: 20px; left: 20px;" onclick="openWindow('friday')"><i><img src="https://z-cdn-media.chatglm.cn/files/9ce82c84-6e4e-412b-b17c-c985df1b0320.jpg?auth_key=1891817943-77a54412d084417fa0e592602bdcd27b-0-32515bf0f73662de6ae5600530ff5301" alt="Friday"><span>ai</span></i></div>
-    <div class="icon" style="top: 20px; left: 20px;" onclick="openWindow('clock')"><i><img src="https://z-cdn-media.chatglm.cn/files/9ce82c84-6e4e-412b-b17c-c985df1b0320.jpg?auth_key=1891817943-77a54412d084417fa0e592602bdcd27b-0-32515bf0f73662de6ae5600530ff5301" alt="Clock"><span>clock</span></i></div>
-    <div class="icon" style="top: 20px; left: 20px;" onclick="openWindow('spider')"><i><img src="https://z-cdn-media.chatglm.cn/files/9ce82c84-6e4e-412b-b17c-c985df1b0320.jpg?auth_key=1891817943-77a54412d084417fa0e592602bdcd27b-0-32515bf0f73662de6ae5600530ff5301" alt="Spidey"><span>spider</span></i></div>
-    <div class="icon" style="top: 20px; left: 20px;" onclick="openWindow('database')"><i><img src="https://z-cdn-media.chatglm.cn/files/9ce82c84-6e4e-412b-b17c-c985df1b0320.jpg?auth_key=1891817943-77a54412d084417fa0e592602bdcd27b-0-32515bf0f73662de6ae5600530ff5301" alt="SHIELD"><span>database</span></i></div>
+    <div class="icon" style="top: 20px; left: 130px;" onclick="openWindow('friday')"><i><img src="https://z-cdn-media.chatglm.cn/files/9ce82c84-6e4e-412b-b17c-c985df1b0320.jpg?auth_key=1891817943-77a54412d084417fa0e592602bdcd27b-0-32515bf0f73662de6ae5600530ff5301" alt="Friday"><span>ai</span></i></div>
+    <div class="icon" style="top: 140px; left: 240px;" onclick="openWindow('clock')"><i><img src="https://z-cdn-media.chatglm.cn/files/cd8a6da8-540b-4262-ab15-2a6944733b3b.png?auth_key=1891817943-94712403e1f44112acc6a74a631aea1b-0-0a7ad806668bcf211c60ac4a970eb5e5" alt="Clock"><span>clock</span></i></div>
+    <div class="icon" style="top: 140px; left: 130px;" onclick="openWindow('spider')"><i><img src="https://z-cdn-media.chatglm.cn/files/c2c372ce-b78b-4cce-b980-612840b108da.jpg?auth_key=1891817943-51061b40d63040479df750fcdc3ec0a4-0-18bb834f44b69afa1eef7463588d7246" alt="Spidey"><span>spider</span></i></div>
+    <div class="icon" style="top: 140px; left: 240px;" onclick="openWindow('database')"><i><img src="https://z-cdn-media.chatglm.cn/files/41b339d1-eedf-4508-a8ad-abc27bfec56f.jpg?auth_key=1891866717-b1676de1fc87443696efefbe0ad2bb04-0-2e882ce4d106cdea86ccfc3ad7d00bd6" alt="SHIELD"><span>database</span></i></div>
+    <div class="icon" style="top: 260px; left: 240px;" onclick="openWindow('thefour')"><i><img src="https://z-cdn-media.chatglm.cn/files/f7adc14e-d1ae-41e9-8021-6c4ea2ae7bfe.png?auth_key=1891866956-709871d31ea048e4a80e602ebdd89136-0-f7105a85fb1c9072f260700707fef24c" alt="Veronica"></i><span>f4</span></div>
+    <div class="icon" style="top: 260px; left: 20px ;" onclick="openWindow('games')"><i><img id="games-icon-img" referrerpolicy="no-referrer" src="https://z-cdn-media.chatglm.cn/files/2f3d2fe1-e9a1-403c-8d77-a28e27ecfbf1.png?auth_key=1891819418-26fdbb5a43b4404cb0194b5d7a52d930-0-640db7da43bd44036761e4df6e239cca" alt="Insomniac Games"></i><span id="games-icon-text">games</span></div>
+    <div class="icon" style="top: 260px; left: 240px;" onclick="openWindow('truebelievers')"><i><img src="https://cdn-icons-png.flaticon.com/512/2882/2882039.png" alt="True Believers Art"></i><span>the comics</span></div>
+
+    <div id="bottombar">
+        <div class="barpic" onclick="openWindow('dailybugle')">📰</div>
+        <div class="barpic" onclick="openWindow('friday')">🤖</div>
+        <div class="barpic" onclick="openWindow('clock')">🕓</div>
+        <div class="barpic" onclick="openWindow('spider')">🕷️</div>
+        <div class="barpic" onclick="openWindow('database')">🛡️</div>
+        <div class="barpic" onclick="openWindow('thefour')">🛰️</div>
+        <div class="barpic" onclick="openWindow('games')">🎮</div>
+        <div class="barpic" onclick="openWindow('truebelievers')">🎨</div>
+
+
+        <div class="barpic zenpool-icon" id="zenpool-icon" onclick="openZenpool()" title="Zenpool">
+            <img src="https://z-cdn-media.chatglm.cn/files/00e05c02-a1b7-4507-ae49-9d6681e08d6b.png?auth_key=1892560207-3afbc4a8f5a44393b95d9f45213daf22-0-fd1f42b84d81ef682ad296ad1691056f" alt="Zenpool">
+        </div>
+        <div id="mode-countdown-wrap" style="margin-left:auto; color: #ffcc00; font-family:'Bebas Neue';cursive;font-size:1.2rem; letter-spacing:2px; text-shadow: 0 0 10px rgba(255,204,0,0.5);">
+        <div class="time" id="bartime" style="margin-left:0">--:--</div>
+    </div>
+
+    <iframe id="doomsday-audio-player" style="position: fixed; top: 0; left: 0; width: 1px; height: 1px; z-index: -1; opacity: 0; pointer-events: none;" allow="autoplay"></iframe>
+
+    <style>
+        #dailybugle {
+            background: white;;
+            color: black !;
+            font-family: 'Times New Roman', Times, serif;
+            border: 3px solid black;
+            box-shadow: 0 0 30px black;
+        }
+        #dailybugle .title-bar {
+            background: black;
+            color: white;
+            font-family: 'Times New Roman', Times, serif;
+            letter-spacing:1px;
+        }
+        #dailybugle .window-content {
+            padding: 0;
+            background: white;
+            background-image: 
+                radial-gradient(circle at 10% 20%, black, transparent 50%),
+                radial-gradient(circle at 90% 70%, black, transparent 50%);
+            overflow-y: auto;
+        }
+        .bugle-masthead {
+            background: white;
+            border-bottom:  4px double black;
+            padding: 20px 25px 15px 25px;
+            text-align:center;
+        }
+        .bugle-masthead .bugle-title-big {
+            font-family: 'Pirata One', 'Times New Roman', serif;
+            font-size: 3.8rem;
+            margin: 0;
+            line-height: 1;
+            letter-spacing: 2px;
+            color: black;
+            text-shadow: 1px 1px 0 black;
+        }
+        .bugle-masthead .bugle-tagline {
+            font-style: italic;
+            font-size: 0.85rem;
+            margin: 8px 0 12px 0;
+            color: #444;
+        }
+        .bugle-meta-row {
+            display: flex;
+            justify-content: space-between;
+            border-top:1px solid black;
+            border-bottom: 1px solid black;
+            padding: 4px 0;
+            font-size:0.75rem;
+            font-variant: small-caps;
+            letter-spacing: 1px;
+            color: black;
+        }
+        .bugle-body {
+            padding: 18px 22px 22px 22px;
+        }
+        .bugle-headline-strip {
+            font-family:'Pirata One', 'Times New Roman', serif;
+            font-size: 1.6rem;
+            text-align: center;
+            margin: 0 0 14px 0;
+            padding: 10px 0;
+            border-top:2px solid black;
+            border-bottom: 1px solid black;
+            letter-spacing: 1px;
+        }
+        .bugle-columns {
+            column-count: 2;
+            column-gap: 24px;
+            column-rule: 1px solid #999;
+        }
+        .bugle-article {
+            break-inside:avoid;
+            margin-bottom: 18px;
+            padding-bottom:14px;
+            border-bottom: 1px dotted #777;
+        }
+        .bugle-article:last-child {
+            border-bottom: none;
+        }
+        .bugle-article h3 {
+            font-family: 'Pirata One', 'Times New Roman', serif;
+            font-size: 1.25rem;
+            line-height: 1.15;
+            margin:0 0 4px 0;
+            color: black;
+            letter-spacing:0.5px;
+        }
+        .bugle-article .bugle-byline {
+            font-size: 0.7rem;
+            font-variant: small-caps;
+            color: #555;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+        .bugle-article p {
+            font-size: 0.85rem;
+            line-height: 1.45;
+            margin: 0;
+            text-align: justify;
+            color: black;
+        }
+        .bugle-article .bugle-lead::first-letter {
+            font-family: 'Pirata One', serif;
+            font-size: 2.6rem;
+            float: left;
+            line-height: 0.85;
+            padding: 4px 6px 0 0;
+            color: black;
+        }
+        .bugle-ad {
+            break-inside: avoid;
+            margin: 18px 0;
+            padding: 12px;
+            background: white;
+            border: 2px dashed red;
+            text-align: center;
+            box-shadow: 0 2px 4px black;
+        }
+        .bugle-ad .ad-eyebrow {
+            font-size: 0.6rem;
+            font-variant: small-caps;
+            color: grey;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+        .bugle-ad .ad-logo-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin: 6px 0;
+        }
+        .bugle-ad .ad-lego-logo {
+            height: 32px;
+            width: auto;
+        }
+        .bugle-ad .ad-marvel-text {
+            background: #ed1d24;
+            color: #fff;
+            font-family: 'Arial Black', sans-serif;
+            font-size: 0.9rem;
+            padding: 4px 8px;
+            letter-spacing: 1px;
+            font-style: italic;
+            font-weight: bold;
+        }
+        .bugle-ad .ad-set-name {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 1.05rem;
+            margin: 6px 0 2px 0;
+            color: black;
+            text-transform: uppercase;
+        }
+        .bugle-ad .ad-set-info {
+            font-size: 0.75rem;
+            color: #555;
+            margin: 2px 0;
+        }
+        .bugle-ad .ad-set-price {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 1.2rem;
+            color: #b8000f;
+            margin: 6px 0 2px 0;
+        }
+        .bugle-ad .ad-cta {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 6px 16px;
+            background: #b8000f;
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Arial Black', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            border-radius: 3px;
+        }
+        .bugle-ad .ad-cta:hover {
+            background: #d40012;
+        }
+        .bugle-podcast-section {
+            margin-top: 22px;
+            padding: 16px;
+            background: black;
+            color: white;
+            border-top: 4px double white;
+        }
+        .bugle-podcast-section h2 {
+            font-family: 'Pirata One', serif;
+            font-size: 1.8rem;
+            margin: 0 0 4px 0;
+            color: yellow;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+        .bugle-podcast-section .podcast-sub {
+            font-style: italic;
+            font-size: 0.8rem;
+            color: #ccc;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .bugle-podcast-section iframe {
+            width: 100%;
+            height: 360px;
+            border: 2px solid yellow;
+            background: #000;
+        }
+        .bugle-podcast-footnote {
+            font-size: 0.7rem;
+            color: grey;
+            text-align: center;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        .bugle-footer-bar {
+            border-top: 2px solid black;
+            margin-top: 18px;
+            padding-top: 8px;
+            font-size: 0.7rem;
+            font-variant: small-caps;
+            text-align: center;
+            color: #444;
+            letter-spacing: 1px;
+        }
+    </style>
 
 </body>
 
