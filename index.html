@@ -647,6 +647,11 @@ if(typeof window.loadGame === 'function'){
     window.loadGame = function(){
         originalLoadGame.apply(this,arguments);
         gameVideoPlaying = true;
+        if(document.body.classList.contains('doomed')){
+            if(trailerStartTimer) clearTimeout(trailerStartTimer);
+            trailerStartTimer = null;
+            isWaitingForGame = true;
+        }
     };
 }
 
