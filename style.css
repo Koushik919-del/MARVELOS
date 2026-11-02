@@ -226,6 +226,6 @@ body.doomed #fan-note .fan-note-label,
 body.doomed #fan-note i{
     color:#00e000;
 }
-@media(max-width:900px){
+@media(max-width:650px){
     #fan-note{display:none}
 }
