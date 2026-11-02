@@ -205,7 +205,8 @@ ARE THE AVENGERS THE PROBLEM OR THE SOLUTION? BEFORE THEM, THE WORLD WAS SAFE! N
 <div class="barpic zenpool-icon" id="zenpool-icon" onclick="openZenpool()" title="Zenpool">
 <img src="https://z-cdn-media.chatglm.cn/files/00e05c02-a1b7-4507-ae49-9d6681e08d6b.png?auth_key=1892560207-3afbc4a8f5a44393b95d9f45213daf22-0-fd1f42b84d81ef682ad296ad1691056f" alt="Zenpool">
 </div>
-<div class="time" id="bartime">--:--</div>
+<div id="mode-countdown-wrap" style="margin-left:auto;color:#ffcc00;font-family:'Bebas Neue',cursive;font-size:13px;letter-spacing:1px;padding:0 8px;white-space:nowrap" title="Time until Normal Mode and Doom Protocol switch">SWITCH IN <span id="mode-countdown">3:00</span></div>
+<div class="time" id="bartime" style="margin-left:0">--:--</div>
 </div>
 
 <iframe id="doomsday-audio-player" style="position: fixed; top: 0; left: 0; width: 1px; height: 1px; z-index: -1; opacity: 0; pointer-events: none;" allow="autoplay"></iframe>
@@ -572,7 +573,7 @@ function enterMarvelOS(){
     tvaScreen.style.transition = 'opacity 0.5s ease';
     tvaScreen.style.opacity = '0';
     if(typeof triggerTimeSlip === 'function'){
-        triggerTimeSlip('tva-entry-screen');
+        triggerTimeSlip();
     }
     setTimeout(()=>{
         tvaScreen.style.display = 'none';
@@ -621,23 +622,24 @@ var hasTrailerPlayed = false;
 var isWaitingForGame = false;
 var gameVideoPlaying = false;
 var waitTimer = null;
+var trailerStartTimer = null;
 const DOOMSDAY_TRAILER_ID = "X1aFkAkFASk";
 
 function playDoomsdayTrailer(){
-    if(hasTrailerPlayed) return;
+    if(hasTrailerPlayed || !document.body.classList.contains('doomed')) return;
+    const player = document.getElementById('doomsday-audio-player');
+    if(!player) return;
     hasTrailerPlayed = true;
     isWaitingForGame = false;
     if(waitTimer) clearTimeout(waitTimer);
-    const player = document.getElementById('doomsday-audio-player');
+    waitTimer = null;
     player.src = `https://www.youtube.com/embed/${DOOMSDAY_TRAILER_ID}?autoplay=1&controls=0&modestbranding=1&rel=0&playsinline=1`;
     console.log("Doomsday Trailer audio is now playing underneath the main screen.");
 }
 
 function checkAndPlayTrailer(){
-    if(hasTrailerPlayed) return;
-    if(isWaitingForGame && !gameVideoPlaying){
-        playDoomsdayTrailer();
-    }
+    if(hasTrailerPlayed || !document.body.classList.contains('doomed')) return;
+    if(isWaitingForGame && !gameVideoPlaying) playDoomsdayTrailer();
 }
 
 if(typeof window.loadGame === 'function'){
@@ -659,16 +661,58 @@ if(typeof window.closeWindow === 'function'){
     };
 }
 
+// Keep the original ticker and Games app content so Normal Mode can restore them.
+const normalNewsTickerContent = document.getElementById('thenewsitems')?.innerHTML || '';
+const normalGamesSidebarContent = document.querySelector('#games .games-sidebar')?.innerHTML || '';
+const normalGamesTitle = document.querySelector('#games .title-bar span')?.textContent || 'Games';
+let previousGameTitle = null;
+let previousGameSrc = '';
+
+function setNewsTickerContent(content){
+    const ticker = document.getElementById('thenewsitems');
+    if(!ticker) return;
+    ticker.innerHTML = content;
+    const restartedTicker = ticker.cloneNode(true);
+    ticker.parentNode.replaceChild(restartedTicker,ticker);
+    void restartedTicker.offsetWidth;
+    restartedTicker.getAnimations().forEach(animation=>{
+        animation.cancel();
+        animation.play();
+    });
+}
+
 function triggerNormalMode(){
+    if(trailerStartTimer) clearTimeout(trailerStartTimer);
+    if(waitTimer) clearTimeout(waitTimer);
+    trailerStartTimer = null;
+    waitTimer = null;
+    isWaitingForGame = false;
+
+    document.body.classList.remove('doomed');
+    setNewsTickerContent(normalNewsTickerContent);
+
+    const gamesSidebar = document.querySelector('#games .games-sidebar');
+    if(gamesSidebar) gamesSidebar.innerHTML = normalGamesSidebarContent;
+    const gamesTitleBar = document.querySelector('#games .title-bar span');
+    if(gamesTitleBar) gamesTitleBar.textContent = normalGamesTitle;
+
+    if(previousGameTitle !== null){
+        const gameTitle = document.getElementById('game-title');
+        const gameFrame = document.getElementById('game-iframe');
+        if(gameTitle) gameTitle.textContent = previousGameTitle;
+        if(gameFrame) gameFrame.setAttribute('src',previousGameSrc);
+        previousGameTitle = null;
+        previousGameSrc = '';
+    }
+
     const gamesIcon = document.getElementById('games-icon-img');
     const gamesText = document.getElementById('games-icon-text');
     if(gamesIcon){
         gamesIcon.src = "https://z-cdn-media.chatglm.cn/files/2f3d2fe1-e9a1-403c-8d77-a28e27ecfbf1.png?auth_key=1891819418-26fdbb5a43b4404cb0194b5d7a52d930-0-640db7da43bd44036761e4df6e239cca";
         gamesIcon.alt = "Insomniac Games";
     }
-    if(gamesText){
-        gamesText.innerText = "Insomniac Games";
-    }
+    if(gamesText) gamesText.textContent = "Insomniac Games";
+
     const doomText = document.querySelector('.doom-text');
     if(doomText){
         doomText.innerHTML = "VON DOOM<br>INDUSTRIES";
@@ -679,47 +723,84 @@ function triggerNormalMode(){
 }
 
 function triggerDoomProtocol(){
+    if(!document.body.classList.contains('doomed')){
+        const gameTitle = document.getElementById('game-title');
+        const gameFrame = document.getElementById('game-iframe');
+        previousGameTitle = gameTitle ? gameTitle.textContent : 'Select a game from the left';
+        previousGameSrc = gameFrame ? gameFrame.getAttribute('src') || '' : '';
+    }
+
+    document.body.classList.add('doomed');
+    setNewsTickerContent('DOOM PROTOCOL ACTIVE &nbsp;&bull;&nbsp; VON DOOM RULES THIS WORLD &nbsp;&bull;&nbsp; RESISTANCE IS FUTILE &nbsp;&bull;&nbsp; ALL HAIL DOOM &nbsp;&bull;&nbsp;');
+
+    const gamesSidebar = document.querySelector('#games .games-sidebar');
+    if(gamesSidebar){
+        gamesSidebar.innerHTML =
+            '<h4>DOOM NETWORK</h4>' +
+            "<button class='game-btn' onclick=\"loadGame('DOOM BROADCAST 1','C8sttjTB2I0','youtube')\">DOOM BROADCAST 1</button>" +
+            "<button class='game-btn' onclick=\"loadGame('DOOM BROADCAST 2','tbTbvbZltW8','youtube')\">DOOM BROADCAST 2</button>" +
+            "<button class='game-btn' onclick=\"loadGame('DOOM BROADCAST 3','8i0b8zs940o','youtube')\">DOOM BROADCAST 3</button>" +
+            "<button class='game-btn' onclick=\"loadGame('DOOM BROADCAST 4','FFWzIbkXxBU','youtube')\">DOOM BROADCAST 4</button>" +
+            "<button class='game-btn' onclick=\"loadGame('DOOM BROADCAST 5','AD-_ofeCqfM','youtube')\">DOOM BROADCAST 5</button>";
+    }
+    const gamesTitleBar = document.querySelector('#games .title-bar span');
+    if(gamesTitleBar) gamesTitleBar.textContent = 'Cynthia Entertainment';
+    const gameTitle = document.getElementById('game-title');
+    const gameFrame = document.getElementById('game-iframe');
+    if(gameTitle) gameTitle.textContent = 'DOOM NETWORK ACCESS';
+    if(gameFrame) gameFrame.setAttribute('src','');
+
     const gamesIcon = document.getElementById('games-icon-img');
     const gamesText = document.getElementById('games-icon-text');
     if(gamesIcon){
         gamesIcon.src = "https://z-cdn-media.chatglm.cn/files/f2cd5ee8-716c-4005-bafa-c7bc752132b1.jpg?auth_key=1891952674-2485b7ebf32f494381e5f1412c4ab818-0-9aa17777f8dfee02ba4041e4fb8259d8";
         gamesIcon.alt = "Cynthia Entertainment";
     }
-    if(gamesText){
-        gamesText.innerText = "Cynthia Entertainment";
-    }
+    if(gamesText) gamesText.textContent = "Cynthia Entertainment";
+
     if(!hasTrailerPlayed){
         if(!gameVideoPlaying){
-            setTimeout(()=>{
-                if(!hasTrailerPlayed){
+            trailerStartTimer = setTimeout(()=>{
+                trailerStartTimer = null;
+                if(!hasTrailerPlayed && document.body.classList.contains('doomed')){
                     playDoomsdayTrailer();
                 }
             },5000);
         }else{
             isWaitingForGame = true;
-            waitTimer = setTimeout(()=>{
-                if(!hasTrailerPlayed){
-                    playDoomsdayTrailer();
-                }
-            },5*60*1000);
         }
     }
     console.log("DOOM PROTOCOL activated.");
 }
 
-const FIVE_MINUTES = 5*60*1000;
-let currentModeIsNormal = false;
+const MODE_INTERVAL = 3 * 60 * 1000;
+let currentModeIsNormal = true;
+let nextModeSwitchAt = Date.now() + MODE_INTERVAL;
+
+function updateModeCountdown(){
+    const countdown = document.getElementById('mode-countdown');
+    if(!countdown) return;
+    const secondsLeft = Math.max(0,Math.ceil((nextModeSwitchAt-Date.now())/1000));
+    const minutes = Math.floor(secondsLeft/60);
+    const seconds = String(secondsLeft%60).padStart(2,'0');
+    countdown.textContent = minutes+':'+seconds;
+}
+
 triggerNormalMode();
-currentModeIsNormal = true;
+updateModeCountdown();
 setInterval(()=>{
-    if(currentModeIsNormal){
-        triggerDoomProtocol();
-        currentModeIsNormal = false;
-    }else{
-        triggerNormalMode();
-        currentModeIsNormal = true;
+    if(Date.now()>=nextModeSwitchAt){
+        if(currentModeIsNormal){
+            triggerDoomProtocol();
+            currentModeIsNormal = false;
+        }else{
+            triggerNormalMode();
+            currentModeIsNormal = true;
+        }
+        nextModeSwitchAt = Date.now()+MODE_INTERVAL;
     }
-},FIVE_MINUTES);
+    updateModeCountdown();
+},1000);
 </script>
 </body>
 </html>
