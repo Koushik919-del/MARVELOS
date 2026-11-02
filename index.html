@@ -701,6 +701,7 @@ function triggerNormalMode(){
         const gameFrame = document.getElementById('game-iframe');
         if(gameTitle) gameTitle.textContent = previousGameTitle;
         if(gameFrame) gameFrame.setAttribute('src',previousGameSrc);
+        gameVideoPlaying = Boolean(previousGameSrc);
         previousGameTitle = null;
         previousGameSrc = '';
     }
@@ -749,6 +750,7 @@ function triggerDoomProtocol(){
     const gameFrame = document.getElementById('game-iframe');
     if(gameTitle) gameTitle.textContent = 'DOOM NETWORK ACCESS';
     if(gameFrame) gameFrame.setAttribute('src','');
+    gameVideoPlaying = false;
 
     const gamesIcon = document.getElementById('games-icon-img');
     const gamesText = document.getElementById('games-icon-text');
