@@ -29,3 +29,5 @@ Credits
 - Spider-Tracker
 - Youtube
 - Z.ai(for debugging and for making the picture links permenant, and make the TVA agent's diaglogue feel like the character's)
+
+ *Important: In the Ship, it says I used AI to make a finished version, but I am happy to say that I have finished the project today, and only used Z.ai for the features listed in credits*
