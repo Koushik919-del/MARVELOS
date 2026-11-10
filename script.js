@@ -44,7 +44,7 @@ let doomQuotes = [
     "I found it... beneath me.",
     "Pain? That is for lesser men...",
     "Child, my love is infinite. My patience is not.",
-    "Big Ups To My Boy Spider-Man"
+    "Big Ups To My Boy Spider-Man",
     "Also Big Ups To My Boy Koushik Tummepalli"
 ];
 
