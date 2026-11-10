@@ -3,7 +3,8 @@ It is a webOS that is made by my passion of Marvel!
 <img width="1087" height="817" alt="image" src="https://github.com/user-attachments/assets/e7ca7097-6f67-4435-90eb-06d3462a45fa" />
 
 Vercel Edition: https://marverlos.vercel.app/
-Github Pages:  https://koushik919-del.github.io/MARVELOS/
+Hugging Face Edition: https://koushik919-marvelos.static.hf.space/index.html?utm_source=chatgpt.com
+Github Pages Edition:  https://koushik919-del.github.io/MARVELOS/
 
 The Features
  - Talk with the TVA
